@@ -1,0 +1,30 @@
+{
+  "model_id": "OPear/videomae-large-finetuned-UCF-Crime",
+  "class_names": [
+    "Assault",
+    "Fighting",
+    "Normal",
+    "Stealing"
+  ],
+  "probe_classes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "num_frames": 16,
+  "window_seconds": 2.5,
+  "windows_per_clip": 8,
+  "steal_cap": 50,
+  "saved_at": "2026-10-23T10:39:10",
+  "clip_run": {
+    "scored": 34,
+    "correct": 27,
+    "accuracy": 0.79
+  },
+  "known_weaknesses": [
+    "Fighting vs Assault confusion in both directions",
+    "Stealing054 and Normal_Videos_251 are near ties",
+    "Stealing104 (motorbike, likely not a theft visual) called Assault"
+  ]
+}

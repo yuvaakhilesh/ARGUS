@@ -1,0 +1,465 @@
+/* ============================================================
+   ARGUS Phase 2 — Watchlist UI Styles
+   Design: Black, white, silver, muted-gold palette.
+   Matches existing Dragonfly visual language.
+   ============================================================ */
+
+/* ── Watchlist Screen Container ───────────────────────────── */
+.watchlist-screen {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-primary, #e8e8e8);
+}
+
+.wl-screen-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 1.5rem;
+}
+
+.wl-screen-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8e8e8;
+  margin: 0 0 0.25rem;
+}
+
+.wl-screen-subtitle {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+/* ── Auth section ─────────────────────────────────────────── */
+.wl-login-card {
+  max-width: 420px;
+  margin: 3rem auto;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 2.5rem;
+}
+
+.wl-login-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e8e8e8;
+  margin: 0 0 1.5rem;
+}
+
+.wl-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.wl-form-row label {
+  font-size: 0.73rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+.wl-form-row input,
+.wl-form-row select,
+.wl-form-row textarea {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  color: #e8e8e8;
+  font-size: 0.88rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.wl-form-row input:focus,
+.wl-form-row select:focus,
+.wl-form-row textarea:focus {
+  outline: none;
+  border-color: rgba(200,170,100,0.5);
+}
+
+.wl-form-row input[type="file"] {
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.wl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.62rem 1.4rem;
+  background: rgba(200,170,100,0.12);
+  border: 1px solid rgba(200,170,100,0.3);
+  border-radius: 7px;
+  color: #c8aa64;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: inherit;
+}
+
+.wl-btn:hover {
+  background: rgba(200,170,100,0.22);
+  border-color: rgba(200,170,100,0.55);
+}
+
+.wl-btn-sm {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.72rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  color: #b0b0b0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.wl-btn-sm:hover { background: rgba(255,255,255,0.1); }
+
+.wl-btn-activate { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+.wl-btn-activate:hover { background: rgba(74,222,128,0.1); }
+
+.wl-btn-revoke { color: #f59e0b; border-color: rgba(245,158,11,0.3); }
+.wl-btn-revoke:hover { background: rgba(245,158,11,0.08); }
+
+.wl-btn-delete { color: #ef4444; border-color: rgba(239,68,68,0.3); }
+.wl-btn-delete:hover { background: rgba(239,68,68,0.08); }
+
+/* ── Tab bar ──────────────────────────────────────────────── */
+.wl-tab-bar {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+.wl-tab-btn {
+  padding: 0.6rem 1.1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(255,255,255,0.38);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: inherit;
+}
+
+.wl-tab-btn.active,
+.wl-tab-btn:hover {
+  color: #c8aa64;
+  border-bottom-color: #c8aa64;
+}
+
+/* ── Tab content ──────────────────────────────────────────── */
+.wl-tab-content {
+  display: none;
+}
+
+/* ── Role badge ───────────────────────────────────────────── */
+.wl-role-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.role-admin    { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+.role-reviewer { background: rgba(99,102,241,0.15); color: #818cf8; border: 1px solid rgba(99,102,241,0.3); }
+.role-operator { background: rgba(16,185,129,0.1); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+
+/* ── User info strip ──────────────────────────────────────── */
+.wl-user-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding: 0.7rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+}
+
+.wl-user-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.wl-username {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #e8e8e8;
+}
+
+/* ── Advisory banner ──────────────────────────────────────── */
+.wl-advisory-banner {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: 7px;
+  padding: 0.75rem 1rem;
+  font-size: 0.79rem;
+  color: #fbbf24;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Table ────────────────────────────────────────────────── */
+.wl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.wl-table thead tr {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.wl-table th {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.wl-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: #d0d0d0;
+  vertical-align: middle;
+}
+
+.wl-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+.wl-possible-match-row td { background: rgba(239,68,68,0.04); }
+
+.wl-actions-cell { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+/* ── Status badges ────────────────────────────────────────── */
+.wl-status-badge {
+  display: inline-block;
+  padding: 0.18rem 0.52rem;
+  border-radius: 4px;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wl-status-active   { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+.wl-status-pending  { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+.wl-status-revoked  { background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+.wl-status-expired  { background: rgba(100,116,139,0.15); color: #94a3b8; border: 1px solid rgba(100,116,139,0.25); }
+.wl-status-deleted  { background: rgba(0,0,0,0.3); color: #6b7280; border: 1px solid rgba(107,114,128,0.2); }
+
+/* ── Match result colors ──────────────────────────────────── */
+.wl-result-possible_match { color: #ef4444; font-weight: 600; }
+.wl-result-inconclusive { color: #f59e0b; }
+.wl-result-no_match { color: #4ade80; }
+.wl-result-insufficient_evidence { color: #94a3b8; }
+.wl-result-processing_failure { color: #6b7280; }
+
+/* ── Image pair ───────────────────────────────────────────── */
+.wl-img-pair {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.25rem 0;
+  flex-wrap: wrap;
+}
+
+.wl-img-slot {
+  flex: 1;
+  min-width: 180px;
+  max-width: 260px;
+  text-align: center;
+}
+
+.wl-img-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.wl-face-img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.4);
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* ── Obs detail meta ──────────────────────────────────────── */
+.wl-obs-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.wl-obs-meta div {
+  font-size: 0.8rem;
+  color: #b0b0b0;
+}
+
+.wl-obs-meta strong {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Review form ──────────────────────────────────────────── */
+.wl-review-form {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.wl-review-form h4 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin: 0 0 1rem;
+}
+
+/* ── Disclaimer text ──────────────────────────────────────── */
+.wl-disclaimer {
+  font-size: 0.73rem;
+  color: rgba(255,255,255,0.3);
+  border-left: 2px solid rgba(200,170,100,0.25);
+  padding-left: 0.75rem;
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+/* ── Status messages ──────────────────────────────────────── */
+.wl-loading { color: rgba(255,255,255,0.35); font-size: 0.82rem; }
+.wl-empty   { color: rgba(255,255,255,0.25); font-size: 0.82rem; font-style: italic; }
+.wl-error   { color: #f87171; font-size: 0.82rem; }
+.wl-success { color: #4ade80; font-size: 0.82rem; }
+.wl-info    { color: #60a5fa; font-size: 0.82rem; }
+.wl-mono    { font-family: 'Space Mono', monospace; font-size: 0.73rem; }
+
+/* ── Global flash messages ────────────────────────────────── */
+.wl-global-flash {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  padding: 0.75rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: none;
+}
+
+.wl-global-error   { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.35); color: #f87171; }
+.wl-global-success { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: #4ade80; }
+
+/* ── Modal ────────────────────────────────────────────────── */
+.wl-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 8000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.wl-modal {
+  background: #0e0e0f;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 860px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.wl-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding-bottom: 1rem;
+}
+
+.wl-modal-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e8e8e8;
+}
+
+.wl-modal-close {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.wl-modal-close:hover { color: #e8e8e8; }
+
+/* ── Enroll / Analyze forms ───────────────────────────────── */
+.wl-section-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.wl-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(200,170,100,0.7);
+  margin-bottom: 1rem;
+}
+
+.wl-reviews-table th { font-size: 0.65rem; }
+

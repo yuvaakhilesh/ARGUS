@@ -1,0 +1,65 @@
+{
+  "model_version": "v1.1.0-probe-remapped-baseline",
+  "frozen_date": "2026-10-25T01:25:00",
+  "model_id": "OPear/videomae-large-finetuned-UCF-Crime",
+  "backbone": {
+    "architecture": "VideoMAEForVideoClassification",
+    "hidden_size": 1024,
+    "num_hidden_layers": 24,
+    "num_attention_heads": 16,
+    "feature_pooling": "mean_pool_temporal",
+    "attention_bias_remapping": {
+      "enabled": true,
+      "source_checkpoint_keys": ["q_bias", "v_bias"],
+      "mapped_transformers_keys": ["query.bias", "value.bias"],
+      "key_bias_handling": "zero_initialized"
+    }
+  },
+  "classifier_head": {
+    "type": "sklearn.pipeline.Pipeline",
+    "components": ["StandardScaler", "LogisticRegression"],
+    "artifact": "probe_4class.joblib",
+    "classes": ["Assault", "Fighting", "Normal", "Stealing"],
+    "num_classes": 4
+  },
+  "temporal_windowing": {
+    "num_frames": 16,
+    "window_seconds": 2.5,
+    "stride_seconds": 1.0,
+    "temporal_overlap_ratio": 0.60,
+    "resolution": [224, 224],
+    "color_format": "RGB"
+  },
+  "decision_policy": {
+    "rule": "is_anomaly = bool(anomaly_score >= threshold)",
+    "anomaly_score_formula": "1.0 - P(Normal)",
+    "default_anomaly_threshold": 0.50,
+    "secondary_rule": "If is_anomaly is True, top_label is the non-Normal class with highest probability. If False, top_label is 'Normal'."
+  },
+  "baseline_evaluation_metrics": {
+    "evaluation_set_size": 15,
+    "in_domain_classes": ["Assault", "Fighting", "Normal", "Stealing"],
+    "accuracy": 1.0000,
+    "macro_precision": 1.0000,
+    "macro_recall": 1.0000,
+    "macro_f1": 1.0000,
+    "per_class": {
+      "Assault": {"precision": 1.0000, "recall": 1.0000, "f1": 1.0000, "samples": 3},
+      "Fighting": {"precision": 1.0000, "recall": 1.0000, "f1": 1.0000, "samples": 3},
+      "Normal": {"precision": 1.0000, "recall": 1.0000, "f1": 1.0000, "samples": 6},
+      "Stealing": {"precision": 1.0000, "recall": 1.0000, "f1": 1.0000, "samples": 3}
+    },
+    "normal_footage_duration_seconds": 859.06,
+    "false_alarms": 0,
+    "false_alarms_per_hour": 0.00
+  },
+  "cpu_performance_benchmarks": {
+    "average_latency_per_window_seconds": 3.484,
+    "throughput_windows_per_second": 0.29,
+    "stage_breakdown_percent": {
+      "preprocessing": 0.4,
+      "backbone_feature_extraction": 99.6,
+      "probe_classification": 0.02
+    }
+  }
+}

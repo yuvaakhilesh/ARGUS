@@ -218,3 +218,36 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ==============================================================================
+# ARGUS Project Specific Exclusions
+# ==============================================================================
+
+# CCTV datasets and original surveillance videos
+test_data/
+videos/
+app/static/samples/Normal_Videos_*
+app/static/samples/Stealing*
+app/static/samples/upload_*
+
+# Generated evidence clips, uploaded videos, and temporary outputs
+outputs/
+app/static/clips/
+app/static/thumbnails/
+app/static/uploads/
+scratch/
+
+# Cache files, logs, and unnecessary evaluation artifacts
+evaluation_report*.csv
+evaluation_report*.json
+phase2_evaluation*.json
+*api_result.json
+scratch_*
+PERMISSIONS.md
+
+# Loose root model weights (necessary weights are versioned under app/core/weights/)
+/yolo11n.pt
+/yolov8n.pt
+
+# Runtime face recognition & watchlist databases/crops
+data/

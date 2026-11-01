@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARGUS — Forensic Surveillance Intelligence &amp; Crime Detection</title>
+  <meta name="description"
+    content="ARGUS: AI-powered CCTV surveillance intelligence, video anomaly classification, grounded object tracking, and forensic summarization.">
+  <link rel="icon" type="image/png" href="/static/assets/favicon.png">
+  <link rel="shortcut icon" href="/static/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+  <!-- Dragonfly Corner Technical Annotations -->
+  <aside class="corner-annotation corner-top-left" aria-hidden="true">
+    ARGUS // MULTI-EYE SURVEILLANCE CORE
+  </aside>
+  <aside class="corner-annotation corner-top-right" aria-hidden="true">
+    TELEMETRY // CUDA 12.8 • RTX 4050 6GB
+  </aside>
+  <aside class="corner-annotation corner-bottom-left" aria-hidden="true">
+    INFERENCE // 16-FRAME BOUNDED STREAMING
+  </aside>
+  <aside class="corner-annotation corner-bottom-right" aria-hidden="true">
+    FORENSIC AUDIT VAULT // 2026.10
+  </aside>
+
+  <!-- Centered Floating Navigation (Dragonfly style) -->
+  <header class="site-header">
+    <nav class="site-nav-pill" aria-label="Global Navigation">
+      <div class="nav-brand-badge" id="navBrandLogo" role="button" tabindex="0" title="Return to ARGUS Landing">
+        <img src="/static/assets/argus-logo-mark.png" alt="ARGUS Panoptes Logo" class="nav-logo-icon">
+        <span class="nav-brand-name">ARGUS</span>
+      </div>
+
+      <div class="nav-separator" aria-hidden="true"></div>
+
+      <div class="nav-menu-links">
+        <button type="button" class="nav-link-btn active" id="navBtnAnalyze">01 // ANALYZE</button>
+        <button type="button" class="nav-link-btn" id="navBtnOverview">02 // OVERVIEW</button>
+        <button type="button" class="nav-link-btn" id="navBtnClips">03 // CLIPS</button>
+        <button type="button" class="nav-link-btn" id="navBtnTracking">04 // TRACKING</button>
+        <button type="button" class="nav-link-btn" id="navBtnTelemetry">05 // TELEMETRY</button>
+      </div>
+
+      <div class="nav-separator" aria-hidden="true"></div>
+
+      <div class="nav-status-indicator" title="RTX 4050 GPU Acceleration Active">
+        <span class="status-dot"></span>
+        <span class="status-text">GPU ACTIVE</span>
+      </div>
+    </nav>
+  </header>
+
+  <div class="app-layout">
+    <main class="main-column" id="mainContent">
+
+      <!-- ============================================================ -->
+      <!-- SCREEN 1: LANDING & UPLOAD HERO (DRAGONFLY STYLE)             -->
+      <!-- ============================================================ -->
+      <section class="screen active hero-landing-screen" id="uploadScreen"
+        aria-label="ARGUS Landing &amp; Video Ingestion">
+        <!-- Layered Atmospheric Background -->
+        <div class="hero-background-canvas" aria-hidden="true"></div>
+        <div class="hero-background-vignette" aria-hidden="true"></div>
+        <div class="hero-grid-texture" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <!-- Editorial Typography Block -->
+          <div class="hero-header-block">
+            <div class="hero-pretitle-tag">PANOPTES VISION CORE // v2.4</div>
+            <h1 class="hero-wordmark">ARGUS</h1>
+            <p class="hero-headline">Every frame holds evidence.</p>
+            <p class="hero-sub-manifesto">
+              AI-assisted surveillance intelligence. Identify candidate events. Review the evidence. Understand the
+              timeline.
+            </p>
+          </div>
+
+          <!-- Hero Action Matrix -->
+          <div class="hero-actions-row">
+            <button type="button" class="btn btn-primary" id="heroAnalyzeActionBtn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              ANALYZE FOOTAGE
+            </button>
+
+            <button type="button" class="btn btn-secondary" id="uploadLoadReportBtn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="15" y2="15"></line>
+              </svg>
+              LOAD SAVED REPORT (.JSON)
+            </button>
+            <input type="file" id="uploadReportInput" accept=".json" style="display: none;">
+          </div>
+
+          <!-- Technical Upload Panel -->
+          <div class="upload-technical-panel" id="uploadDropZoneWrapper">
+            <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-label="Upload surveillance video file">
+              <div class="drop-icon-wrapper" aria-hidden="true">
+                <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+              </div>
+
+              <p class="drop-heading">
+                Drag and drop CCTV video stream, or <button type="button" class="browse-link"
+                  id="browseTriggerBtn">Browse files</button>
+              </p>
+              <p class="drop-formats">Supported Codecs: MP4 (H.264), AVI, MOV, MKV</p>
+              <p class="drop-size-hint">Stream Bounded Memory Architecture // Handles files up to 25 GB</p>
+
+              <input type="file" id="fileInput" accept=".mp4,.avi,.mov,.mkv,.webm" aria-hidden="true" tabindex="-1"
+                style="display: none;">
+            </div>
+
+            <!-- Quick Demo Sample Footage Trigger Rail -->
+            <div class="quick-samples-rail">
+              <span class="samples-label">Available Benchmark Test Footage:</span>
+              <div class="samples-buttons-group">
+                <button type="button" class="sample-chip-btn" data-sample="upload_b7c54c67.mp4" id="sampleFightingBtn">
+                  ⚡ Fighting Incident (upload_b7c54c67)
+                </button>
+                <button type="button" class="sample-chip-btn" data-sample="Normal_Videos_247_x264.mp4"
+                  id="sampleNormalBtn">
+                  ⚡ Normal CCTV (Normal_247)
+                </button>
+                <button type="button" class="sample-chip-btn" data-sample="Stealing050_x264.mp4" id="sampleStealingBtn">
+                  ⚡ Stealing Candidate (Stealing050)
+                </button>
+              </div>
+            </div>
+
+            <div class="error-banner" id="uploadErrorBanner" role="alert" style="display: none;">
+              <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              <span class="error-text" id="uploadErrorText">Error message</span>
+              <button type="button" class="error-dismiss-btn" id="dismissErrorBtn" aria-label="Dismiss error">✕</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SCREEN 2: PROCESSING & STREAMING INFERENCE                    -->
+      <!-- ============================================================ -->
+      <section class="screen processing-screen" id="processingScreen" aria-label="Processing Screen" aria-live="polite">
+        <div class="processing-card">
+          <header class="screen-header">
+            <h2 class="screen-title">Analyzing Footage</h2>
+            <p class="screen-subtitle">Extracting temporal windows, running VideoMAE classification and ByteTrack
+              triage.</p>
+          </header>
+
+          <!-- Video Thumbnail Preview with Radar Sweep -->
+          <div class="preview-box">
+            <canvas id="previewThumbnailCanvas" class="preview-thumbnail" width="480" height="270"
+              aria-label="Video thumbnail preview"></canvas>
+            <video id="clientPreviewVideo" style="display: none;" muted playsinline preload="auto"></video>
+          </div>
+
+          <!-- File Information -->
+          <div class="file-meta-row">
+            <div class="file-meta-info">
+              <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+              <span class="file-name" id="processingFileName">video.mp4</span>
+            </div>
+            <span class="file-size" id="processingFileSize">0.0 MB</span>
+          </div>
+
+          <!-- Progress Bar & Percentage -->
+          <div class="progress-section">
+            <div class="progress-info-row">
+              <span class="progress-label" id="currentStageText">Uploading...</span>
+              <span class="progress-percentage" id="progressPercentageText">0%</span>
+            </div>
+            <div class="progress-bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+              id="progressBarTrack">
+              <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Stage Indicator Checklist -->
+          <div class="stage-stepper" aria-label="Analysis stages">
+            <div class="stage-step" id="stage-uploading">
+              <span class="step-dot"></span>
+              <span class="step-label">Uploading</span>
+            </div>
+            <div class="stage-step" id="stage-extracting">
+              <span class="step-dot"></span>
+              <span class="step-label">Extracting frames</span>
+            </div>
+            <div class="stage-step" id="stage-running">
+              <span class="step-dot"></span>
+              <span class="step-label">Running VideoMAE</span>
+            </div>
+            <div class="stage-step" id="stage-summary">
+              <span class="step-dot"></span>
+              <span class="step-label">Generating summary</span>
+            </div>
+          </div>
+
+          <!-- Cancel Action -->
+          <div class="processing-footer">
+            <button type="button" class="btn btn-secondary btn-sm" id="cancelProcessBtn">Cancel Analysis</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SCREEN 3: RESULTS (THREE-VIEW FORENSIC DASHBOARD)             -->
+      <!-- ============================================================ -->
+      <section class="screen results-screen" id="resultsScreen" aria-label="ARGUS Results &amp; Forensic Workspace">
+        <div class="results-container">
+
+          <!-- Compact Workspace Header -->
+          <div class="results-workspace-header">
+            <div class="workspace-title-block">
+              <span class="workspace-pretitle">FORENSIC SURVEILLANCE AUDIT // ARGUS v2.4</span>
+              <h2 class="workspace-title">Analysis Workspace: <span class="workspace-filename"
+                  id="overviewVideoName">video.mp4</span></h2>
+            </div>
+
+            <div class="workspace-actions-group">
+              <button type="button" class="btn btn-secondary btn-sm" id="analyzeAnotherBtn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="1 4 1 10 7 10"></polyline>
+                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+                Analyze Another
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="loadReportBtn"
+                title="Load saved JSON analysis report">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Load Report
+              </button>
+              <input type="file" id="loadReportInput" accept=".json" style="display: none;">
+              <button type="button" class="btn btn-primary btn-sm" id="exportReportBtn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Export Report
+              </button>
+            </div>
+          </div>
+
+          <!-- Three View Navigation Tabs -->
+          <nav class="view-tabs" role="tablist" aria-label="Dashboard views">
+            <button type="button" class="view-tab-btn active" role="tab" id="tabOverview" aria-selected="true"
+              data-view="overview">
+              <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              01 // Overview
+            </button>
+            <button type="button" class="view-tab-btn" role="tab" id="tabFlaggedClips" aria-selected="false"
+              data-view="flagged-clips">
+              <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+              02 // Flagged Clips <span class="tab-count-badge" id="tabClipsBadge">0</span>
+            </button>
+            <button type="button" class="view-tab-btn" role="tab" id="tabTracking" aria-selected="false"
+              data-view="tracking">
+              <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              03 // Detected Objects &amp; Tracking
+            </button>
+          </nav>
+
+          <!-- ============================================================ -->
+          <!-- VIEW 1: OVERVIEW                                              -->
+          <!-- ============================================================ -->
+          <div class="dashboard-view active" id="viewOverview" role="tabpanel" aria-labelledby="tabOverview">
+
+            <!-- Top Verdict & Key Metrics Bar -->
+            <div class="overview-top-strip">
+              <!-- Left: Verdict & Primary Classification -->
+              <div class="verdict-banner-card">
+                <div class="verdict-banner-header">
+                  <span class="verdict-badge normal" id="verdictBadge">Normal</span>
+                  <h3 class="verdict-class-title" id="topClassTitle">Normal Activity</h3>
+                  <div class="verdict-pills-row">
+                    <span class="verdict-pill">Conf: <strong id="confidenceValue">--%</strong></span>
+                    <span class="verdict-pill">Severity: <strong id="severityBadge"
+                        class="severity-badge none">NONE</strong></span>
+                  </div>
+                </div>
+                <p class="summary-text" id="summaryDescription">
+                  Surveillance footage analyzed with no behavioral anomalies or safety violations.
+                </p>
+              </div>
+
+              <!-- Right: 5-Metric Quick Row -->
+              <div class="overview-metrics-strip">
+                <div class="metric-cell">
+                  <span class="metric-label">Duration</span>
+                  <strong class="metric-val" id="overviewVideoDuration">not available</strong>
+                </div>
+                <div class="metric-cell">
+                  <span class="metric-label">Incidents</span>
+                  <strong class="metric-val" id="overviewIncidentsCount">0</strong>
+                </div>
+                <div class="metric-cell">
+                  <span class="metric-label">Flagged Time</span>
+                  <strong class="metric-val" id="overviewFlaggedDuration">0.0s</strong>
+                </div>
+                <div class="metric-cell">
+                  <span class="metric-label">Clips</span>
+                  <strong class="metric-val" id="overviewFlaggedClipsCount">0</strong>
+                </div>
+                <div class="metric-cell">
+                  <span class="metric-label">Object Triage</span>
+                  <strong class="metric-val" id="overviewSentToObjectAnalysis">0</strong>
+                </div>
+                <div class="metric-cell">
+                  <span class="metric-label">Latency</span>
+                  <strong class="metric-val" id="overviewProcessingTime">not available</strong>
+                </div>
+                <span id="overviewVerdict" style="display: none;">not available</span>
+              </div>
+            </div>
+
+            <!-- Two-Column Interactive Forensic Core -->
+            <div class="overview-forensic-split">
+              <!-- Left Column: Detected Incidents Queue -->
+              <div class="card overview-incidents-panel">
+                <div class="panel-header-row">
+                  <div class="panel-title-group">
+                    <h4 class="panel-heading">Flagged Incidents</h4>
+                    <span class="incidents-badge" id="overviewIncidentsHeaderBadge">0</span>
+                  </div>
+                  <span class="panel-hint">Click incident to seek video</span>
+                </div>
+
+                <div class="overview-incidents-list" id="overviewIncidentsList">
+                  <!-- Populated dynamically via JS -->
+                </div>
+              </div>
+
+              <!-- Right Column: Video Playback & Timeline Scrubber -->
+              <div class="card overview-media-panel">
+                <div class="panel-header-row">
+                  <h4 class="panel-heading">Forensic Video Evidence</h4>
+                  <div class="player-status-tag" id="overviewPlayerStatusTag">STREAM READY</div>
+                </div>
+
+                <!-- Video Frame -->
+                <div class="overview-video-frame">
+                  <video id="resultsVideoPlayer" class="main-video-player" controls playsinline preload="metadata"
+                    aria-label="Analyzed surveillance video playback">
+                    Your browser does not support HTML5 video playback.
+                  </video>
+                </div>
+
+                <!-- Forensic Timeline Scrubber -->
+                <div class="overview-timeline-widget">
+                  <div class="timeline-bar-wrapper">
+                    <div class="timeline-bar" id="timelineBar" role="slider" aria-label="Video timeline scrubber"
+                      tabindex="0">
+                      <div class="timeline-segments" id="timelineSegments"></div>
+                      <div class="timeline-playhead" id="timelinePlayhead" style="left: 0%;"></div>
+                    </div>
+                    <div class="timeline-time-labels">
+                      <span id="timelineStartLabel">00:00</span>
+                      <span id="timelineCurrentLabel" class="current-time-indicator">00:00</span>
+                      <span id="timelineEndLabel">00:00</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Technical Details (Probability & Telemetry) -->
+            <div class="overview-bottom-meta">
+              <section class="card breakdown-card" aria-label="Probability breakdown">
+                <details class="breakdown-details" id="breakdownDetails">
+                  <summary class="breakdown-summary">
+                    <span class="summary-title">4-Class Anomaly Probability Distribution</span>
+                    <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      aria-hidden="true">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </summary>
+                  <div class="breakdown-content" id="breakdownContent">
+                    <!-- Populated via JS -->
+                  </div>
+                </details>
+              </section>
+
+              <div class="telemetry-bar-card">
+                <span class="telemetry-bar-label">MODEL &amp; HARDWARE ACCELERATION:</span>
+                <span class="telemetry-bar-val" id="overviewModelDevice">not available</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ============================================================ -->
+          <!-- VIEW 2: FLAGGED CLIPS                                         -->
+          <!-- ============================================================ -->
+          <div class="dashboard-view" id="viewFlaggedClips" role="tabpanel" aria-labelledby="tabFlaggedClips"
+            style="display: none;">
+            <section class="detected-clips-section" aria-label="Detected incident clips">
+              <div class="clips-toolbar">
+                <div class="section-title-row">
+                  <h3 class="card-section-title">Flagged Evidence Clips</h3>
+                  <span class="count-badge" id="clipsCountBadge">0 clips</span>
+                </div>
+                <div class="clips-filters-group">
+                  <label class="filter-control">
+                    <span class="filter-label">Class:</span>
+                    <select id="clipsClassFilter" class="filter-select" aria-label="Filter clips by class">
+                      <option value="ALL">All Classes</option>
+                    </select>
+                  </label>
+                  <label class="filter-control">
+                    <span class="filter-label">Sort:</span>
+                    <select id="clipsSortSelect" class="filter-select" aria-label="Sort clips">
+                      <option value="time_asc">Time (Earliest)</option>
+                      <option value="time_desc">Time (Latest)</option>
+                      <option value="conf_desc">Confidence (Highest)</option>
+                      <option value="conf_asc">Confidence (Lowest)</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <div class="clips-grid" id="clipsGrid">
+                <!-- Dynamically populated with clip cards -->
+              </div>
+            </section>
+          </div>
+
+          <!-- ============================================================ -->
+          <!-- VIEW 3: UNIVERSAL OBJECT SEARCH & TEMPORAL EXPLORATION       -->
+          <!-- ============================================================ -->
+          <div class="dashboard-view" id="viewTracking" role="tabpanel" aria-labelledby="tabTracking"
+            style="display: none;">
+            <!-- 1. Universal Search Header (Search-First Interface) -->
+            <div class="card tracking-header-card">
+              <div class="tracking-selector-row">
+                <label for="trackingClipSelect" class="tracking-selector-label">
+                  <strong>Evidence Video / Clip:</strong>
+                </label>
+                <select id="trackingClipSelect" class="filter-select tracking-clip-dropdown"
+                  aria-label="Select incident clip for tracking review">
+                  <option value="">No clips available</option>
+                </select>
+
+                <div class="export-group">
+                  <button type="button" class="btn btn-secondary btn-sm" id="exportTrackingJsonBtn"
+                    title="Export Tracking / Search Data as JSON">
+                    EXPORT JSON
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="exportTrackingCsvBtn"
+                    title="Export Tracking / Search Data as CSV">
+                    EXPORT CSV
+                  </button>
+                </div>
+              </div>
+
+              <!-- Universal Custom Object Search Field (Section 1) -->
+              <div class="universal-search-container" style="margin-top: 14px;">
+                <label for="trackingSearchInput" class="universal-search-prompt">
+                  What object are you looking for?
+                </label>
+                <div class="universal-search-input-row">
+                  <div class="universal-search-input-wrap">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="trackingSearchInput" class="universal-search-input"
+                      placeholder="Enter object name (e.g. Person, Umbrella, Phone, Backpack, Handbag, Car, Knife, Pistol, Dog)..."
+                      aria-label="What object are you looking for?">
+                  </div>
+                  <button type="button" class="btn btn-primary" id="trackingSearchBtn">
+                    SEARCH
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="trackingResetFilterBtn"
+                    style="display: none;">
+                    RESET
+                  </button>
+                </div>
+
+                <!-- Quick Query Suggestion Pills -->
+                <div class="quick-search-pills" id="quickSearchPills">
+                  <span class="quick-pill-label">Quick suggestions:</span>
+                  <button type="button" class="quick-query-pill" data-query="Person">Person</button>
+                  <button type="button" class="quick-query-pill" data-query="Car">Car</button>
+                  <button type="button" class="quick-query-pill" data-query="Phone">Phone</button>
+                  <button type="button" class="quick-query-pill" data-query="Backpack">Backpack</button>
+                  <button type="button" class="quick-query-pill" data-query="Umbrella">Umbrella</button>
+                  <button type="button" class="quick-query-pill" data-query="Handbag">Handbag</button>
+                  <button type="button" class="quick-query-pill" data-query="Pistol">Pistol</button>
+                  <button type="button" class="quick-query-pill" data-query="Knife">Knife</button>
+                  <button type="button" class="quick-query-pill" data-query="Bicycle">Bicycle</button>
+                </div>
+
+                <!-- Query Status & Resolution Feedback Banner -->
+                <div class="search-status-banner" id="trackingSearchStatusBanner" style="display: none;">
+                  <div class="status-banner-left">
+                    <span id="trackingSearchStatusText">Search ready</span>
+                    <span id="trackingSearchResultsBadge" class="badge-count">0 matches</span>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-xs" id="triggerModeBScanBtn" style="display: none;">
+                    Initiate Targeted Video Scan (Mode B)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Video Player with Grounded Canvas Overlay -->
+            <div class="card tracking-player-card">
+              <div class="tracking-video-wrapper" id="trackingVideoWrapper">
+                <video id="trackingVideoPlayer" class="tracking-video" controls playsinline preload="metadata"
+                  aria-label="Tracking evidence video playback">
+                  Your browser does not support HTML5 video playback.
+                </video>
+                <canvas id="trackingCanvas" class="tracking-overlay-canvas"
+                  aria-label="Grounded bounding box overlay canvas"></canvas>
+              </div>
+
+              <!-- Overlay Toggles and Playhead Sync Bar -->
+              <div class="tracking-controls-bar">
+                <div class="toggles-group">
+                  <label class="toggle-control">
+                    <input type="checkbox" id="toggleOverlay" checked>
+                    <span class="toggle-text">Bounding Boxes</span>
+                  </label>
+                  <label class="toggle-control">
+                    <input type="checkbox" id="toggleTrajectories" checked>
+                    <span class="toggle-text">Trajectories</span>
+                  </label>
+                  <label class="toggle-control">
+                    <input type="checkbox" id="toggleWeapons" checked>
+                    <span class="toggle-text"><span class="badge-dot" style="background-color: #ef4444;"></span>
+                      Weapons</span>
+                  </label>
+                  <label class="toggle-control">
+                    <input type="checkbox" id="togglePersons" checked>
+                    <span class="toggle-text"><span class="badge-dot person-dot"></span> Persons</span>
+                  </label>
+                  <label class="toggle-control">
+                    <input type="checkbox" id="toggleObjects" checked>
+                    <span class="toggle-text"><span class="badge-dot" style="background-color: #a855f7;"></span>
+                      Belongings</span>
+                  </label>
+                  <label class="toggle-control">
+                    <input type="checkbox" id="toggleVehicles" checked>
+                    <span class="toggle-text"><span class="badge-dot" style="background-color: #f59e0b;"></span>
+                      Vehicles</span>
+                  </label>
+                  <label class="toggle-control">
+                    <input type="checkbox" id="toggleOtherObjects" checked>
+                    <span class="toggle-text"><span class="badge-dot" style="background-color: #0284c7;"></span> Other
+                      Objects</span>
+                  </label>
+                </div>
+
+                <!-- Status Filter Radio Group -->
+                <div class="status-filter-pills-group" id="statusFilterPillsGroup">
+                  <span class="filter-pill-label">Filter:</span>
+                  <button type="button" class="status-filter-pill active" data-filter="all">All Results</button>
+                  <button type="button" class="status-filter-pill" data-filter="confirmed_only">Confirmed (≥2 frames)</button>
+                  <button type="button" class="status-filter-pill" data-filter="uncertain_only">Uncertain (1-frame)</button>
+                </div>
+
+                <div class="tracking-time-badge" id="trackingTimeIndicator">
+                  Source Time: 00:00.0
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty State Banner -->
+            <div class="empty-state-banner" id="trackingEmptyBanner" style="display: none;">
+              <svg class="banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <span id="trackingEmptyBannerText">No objects or persons were detected in this interval.</span>
+            </div>
+
+            <!-- 3. Search Results & Observed Appearance Intervals (Section 4) -->
+            <section class="card search-results-card" id="trackingSearchResultsCard" aria-label="Search Results">
+              <div class="table-header-row">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h4 class="card-section-title">Object Search Results &amp; Observed Appearance Intervals</h4>
+                  <span class="sub-label" style="font-size: 11px; color: var(--silver);">(Click any interval to seek video and highlight object)</span>
+                </div>
+                <span class="tracks-count" id="trackingResultsCount">0 tracks matching</span>
+              </div>
+              <div class="search-results-list" id="trackingSearchResultsList">
+                <div class="results-empty-placeholder">
+                  Enter an object name in the search bar above to locate when and where it appears.
+                </div>
+              </div>
+            </section>
+
+            <!-- 4. Collapsible Advanced Settings Panel (Section 7) -->
+            <details class="card advanced-settings-card" id="trackingAdvancedSettings" style="margin-top: 14px;">
+              <summary class="advanced-settings-summary">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                  <strong>Advanced Settings, Mode B Targeted Scanner &amp; Triage Diagnostics</strong>
+                </div>
+                <span class="sub-label" style="font-size: 10.5px; color: var(--silver);">Click to expand advanced controls</span>
+              </summary>
+
+              <div class="advanced-settings-body" style="padding: 12px 0 4px 0;">
+                <!-- Targeted Object Scan (Mode B) -->
+                <div class="scan-panel-card" style="padding: 12px; margin-bottom: 14px; background: rgba(255,255,255,0.02); border-radius: 6px;">
+                  <h5 style="margin-bottom: 4px; color: var(--gold-primary);">Mode B — Targeted Object Scan</h5>
+                  <p style="font-size: 10.5px; color: var(--silver); margin-bottom: 10px;">
+                    Scan the recording for specific target classes across custom time intervals.
+                  </p>
+                  <div class="scan-controls-grid">
+                    <div class="scan-field" style="flex: 2;">
+                      <label for="targetedScanClassSelect">Target Class</label>
+                      <select id="targetedScanClassSelect" aria-label="Select target class to scan"></select>
+                    </div>
+                    <div class="scan-field">
+                      <label for="targetedScanStart">Start Time (s)</label>
+                      <input type="number" id="targetedScanStart" value="0.0" min="0" step="0.5">
+                    </div>
+                    <div class="scan-field">
+                      <label for="targetedScanEnd">End Time (s)</label>
+                      <input type="number" id="targetedScanEnd" value="10.0" min="0.5" step="0.5">
+                    </div>
+                    <div class="scan-field">
+                      <label for="targetedScanFps">Sample FPS</label>
+                      <input type="number" id="targetedScanFps" value="10.0" min="1.0" max="30.0" step="1.0">
+                    </div>
+                    <div>
+                      <button type="button" class="btn btn-primary btn-sm" id="targetedScanRunBtn" style="width: 100%;">
+                        RUN SCAN
+                      </button>
+                    </div>
+                  </div>
+                  <div id="targetedScanFeedback"
+                    style="font-family: var(--font-mono); font-size: 11px; margin-top: 10px; display: none;"></div>
+                </div>
+
+                <!-- Triage Evaluation & Review Recommendation -->
+                <div class="triage-card" style="margin-bottom: 14px;">
+                  <div class="triage-header-row">
+                    <div class="triage-left">
+                      <span class="pill-label">Grounded Object Triage</span>
+                      <h4 class="triage-title" id="trackingRecommendationTitle">STANDARD_REVIEW</h4>
+                    </div>
+                    <div class="triage-score-box">
+                      <span class="triage-score-label">Triage Score</span>
+                      <strong class="triage-score-val" id="trackingTriageScore">0%</strong>
+                    </div>
+                  </div>
+                  <p class="triage-reason" id="trackingDecisionReason">not available</p>
+                  <div class="triage-trigger-sub" id="trackingTriggerReasonRow">
+                    <span class="sub-label">Trigger Reason:</span>
+                    <span id="trackingTriggerReason">not available</span>
+                  </div>
+                  <div class="triage-disclaimer" id="trackingDisclaimer">
+                    Uncalibrated visual cue score for human review prioritization. Does not establish ownership, consent, or
+                    legal intent to steal. Spatial proximity to a weapon does not prove possession.
+                  </div>
+                </div>
+
+                <!-- Interaction Cues List -->
+                <div class="cues-card">
+                  <div class="cues-header-row">
+                    <h5 class="card-section-title">Forensic Interaction &amp; Threat Cues</h5>
+                    <span class="cues-hint">Click any cue to seek video</span>
+                  </div>
+                  <div class="cues-list" id="trackingCuesList">
+                    <div class="empty-cue-text">No interaction cues triggered for this interval.</div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Universal Object Track Inspector Modal (Section 5) -->
+          <div class="track-detail-modal" id="trackDetailModal" role="dialog" aria-modal="true"
+            aria-labelledby="trackDetailTitle">
+            <div class="track-detail-card">
+              <div class="track-detail-header">
+                <h3 class="track-detail-title" id="trackDetailTitle">Track #OBJ-1 [person]</h3>
+                <button type="button" class="btn btn-secondary btn-sm" id="closeTrackDetailBtn"
+                  aria-label="Close track detail">✕</button>
+              </div>
+
+              <!-- Main Telemetry Grid -->
+              <div class="track-telemetry-grid" id="trackDetailGrid">
+                <!-- Dynamically populated -->
+              </div>
+
+              <!-- Observed Appearance Intervals (Clickable) -->
+              <div class="track-intervals-section" style="margin-top: 14px;">
+                <h4 style="font-size: 11px; text-transform: uppercase; color: var(--silver); margin-bottom: 8px;">
+                  Observed Appearance Intervals (Click to seek):
+                </h4>
+                <div class="track-intervals-list" id="trackDetailIntervalsList">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+
+              <!-- Video Navigation Action Bar -->
+              <div class="track-actions-row" style="margin-top: 14px;">
+                <button type="button" class="btn btn-primary btn-sm" id="seekFirstSeenBtn">
+                  Seek First Seen (0.0s)
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="prevObservationBtn">
+                  ◀ Prev Obs
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="nextObservationBtn">
+                  Next Obs ▶
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="seekLastSeenBtn">
+                  Seek Last Seen (0.0s)
+                </button>
+              </div>
+
+              <div class="triage-disclaimer" id="trackDetailDisclaimer" style="margin-top: 10px;">
+                Responsible AI Note: Centroid trajectories, timestamps, and confidence values are computed from active
+                model observations. Proximity between person and object/weapon denotes spatial co-occurrence, not legal
+                proof of possession.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Telemetry Modal Drawer -->
+  <aside class="telemetry-modal" id="telemetryModal" aria-modal="true" role="dialog" aria-labelledby="telemetryTitle">
+    <div class="telemetry-card">
+      <div class="telemetry-header">
+        <h3 class="telemetry-title" id="telemetryTitle">ARGUS SYSTEM TELEMETRY</h3>
+        <button type="button" class="telemetry-close-btn" id="closeTelemetryBtn" aria-label="Close telemetry">✕</button>
+      </div>
+
+      <div class="telemetry-grid">
+        <div class="telemetry-stat">
+          <span class="telemetry-label">GPU Acceleration</span>
+          <span class="telemetry-val" id="telemetryGpuModel">NVIDIA RTX 4050 Laptop GPU</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="telemetry-label">CUDA Driver Build</span>
+          <span class="telemetry-val" id="telemetryCudaBuild">PyTorch 2.11.0 + cu128</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="telemetry-label">Allocated VRAM</span>
+          <span class="telemetry-val" id="telemetryVramVal">637.9 MB / 6.00 GB (10.4%)</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="telemetry-label">VideoMAE Backbone</span>
+          <span class="telemetry-val" id="telemetryBackboneLatency">99.0 ms / 16 frames</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="telemetry-label">YOLOv8 + ByteTrack</span>
+          <span class="telemetry-val" id="telemetryYoloLatency">26.2 ms / frame</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="telemetry-label">Streaming RAM Cache</span>
+          <span class="telemetry-val">&lt; 5.0 MB (Bounded Eviction)</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="telemetry-label">Max File Upload Limit</span>
+          <span class="telemetry-val">25 GB (Multi-Hour CCTV)</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="telemetry-label">Out-of-Distribution Gating</span>
+          <span class="telemetry-val">Active (||z||_2 &le; 52.5)</span>
+        </div>
+      </div>
+
+      <div class="processing-footer">
+        <button type="button" class="btn btn-secondary btn-sm" id="closeTelemetryBtn2">Close Diagnostics</button>
+      </div>
+    </div>
+  </aside>
+
+  <script src="/static/js/app.js"></script>
+</body>
+
+</html>
